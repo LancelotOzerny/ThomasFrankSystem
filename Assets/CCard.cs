@@ -41,6 +41,11 @@ public class CCard : MonoBehaviour
                         ((XmlElement)node).GetAttribute("checkDate"),
                         "yyyy.MM.dd",
                         System.Globalization.CultureInfo.InvariantCulture
+                    ),
+                    DateTime.ParseExact(
+                        ((XmlElement)node).GetAttribute("lastCheckDate"),
+                        "yyyy.MM.dd",
+                        System.Globalization.CultureInfo.InvariantCulture
                     )
                 ));
                 break;
@@ -102,6 +107,7 @@ public class CCard : MonoBehaviour
         card.SetAttribute("title", info.Title);
         card.SetAttribute("description", info.Description);
         card.SetAttribute("checkDate", info.CheckDay.ToString("yyyy.MM.dd"));
+        card.SetAttribute("lastCheckDate", info.LastCheckDay.ToString("yyyy.MM.dd"));
         container.AppendChild(card);
 
         xmlDoc.Save(xmlPath);
@@ -121,9 +127,6 @@ public class CCard : MonoBehaviour
                 result.Add(card);
             }
         }
-
-        Debug.Log($"Result = {result.Count}");
-        Debug.Log($"Counts = {cards.Count}");
 
         return result;
     }
