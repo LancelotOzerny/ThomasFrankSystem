@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class CCard : MonoBehaviour
@@ -21,27 +22,18 @@ public class CCard : MonoBehaviour
         }
 
         createXml();
-        ReadXml();
+        ReadXml(xmlDoc);
     }
 
-    private void ReadXml()
+    private void ReadXmlElement(XmlNode node)
     {
-        xmlDoc.Load(xmlPath);
-
-        foreach (XmlNode node in xmlDoc.ChildNodes)
+        switch (node.Name.ToLower())
         {
-            if (node.Name.ToLower() == "cards")
-            {
+            case "cards":
                 container = (XmlElement)node;
                 break;
-            }
-        }
 
-        foreach (XmlNode node in xmlDoc.ChildNodes)
-        {
-            if (node.Name.ToLower() == "card")
-            {
-                Debug.Log(node.Name);
+            case "card":
                 cards.Add(new CardInfo(
                     ((XmlElement)node).GetAttribute("title"),
                     ((XmlElement)node).GetAttribute("description"),
@@ -51,6 +43,21 @@ public class CCard : MonoBehaviour
                         System.Globalization.CultureInfo.InvariantCulture
                     )
                 ));
+                break;
+        }
+    }
+
+    private void ReadXml(XmlNode xml)
+    {
+        xmlDoc.Load(xmlPath);
+
+        foreach (XmlNode node in xml.ChildNodes)
+        {
+            ReadXmlElement(node);
+
+            if (node.HasChildNodes)
+            {
+                ReadXml(node);
             }
         }
     }
@@ -101,5 +108,23 @@ public class CCard : MonoBehaviour
         cards.Add(info);
 
         return true;
+    }
+
+    public List<CardInfo> GetTrainCards()
+    {
+        List<CardInfo> result = new List<CardInfo>();
+
+        foreach (CardInfo card in cards)
+        {
+            if (card.CheckDay <= DateTime.Now)
+            {
+                result.Add(card);
+            }
+        }
+
+        Debug.Log($"Result = {result.Count}");
+        Debug.Log($"Counts = {cards.Count}");
+
+        return result;
     }
 }

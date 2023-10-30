@@ -17,6 +17,6 @@ public class CardInfo
     {
         Title = title;
         Description = description;
-        this.CheckDay = DateTime.Today.AddDays(1);
+        this.CheckDay = DateTime.Today.AddDays(1)   ;
     }
 }
