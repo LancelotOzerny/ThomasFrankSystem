@@ -9,7 +9,7 @@ public class CCard : MonoBehaviour
     [SerializeField] private string xmlPath = string.Empty;
     
     private XmlDocument xmlDoc = new XmlDocument();
-    private XmlElement container = null;
+    private XmlNode container = null;
 
     [SerializeField] private List<CardInfo> cards = new List<CardInfo>(); 
 
@@ -124,5 +124,33 @@ public class CCard : MonoBehaviour
         }
 
         return result;
+    }
+
+    public void RemoveCard(CardInfo card)
+    {
+        if (container == null)
+        {
+            container = xmlDoc.CreateElement("cards");
+            xmlDoc.AppendChild(container);
+        }
+
+        foreach (XmlNode cardNode in container)
+        {
+            string title = ((XmlElement)cardNode).GetAttribute("title");
+            string description = ((XmlElement)cardNode).GetAttribute("description");
+
+            if (title == card.Title && description == card.Description)
+            {
+                container.RemoveChild(cardNode);
+                xmlDoc.Save(xmlPath);
+
+                return;
+            }
+        }
+    }
+
+    public void SaveCard(CardInfo card)
+    {
+
     }
 }

@@ -1,6 +1,7 @@
 using UnityEngine.UI;
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 public class CTrainer : MonoBehaviour
 {
@@ -41,11 +42,29 @@ public class CTrainer : MonoBehaviour
 
     public void SetGoodTouch()
     {
+        if (++currentCard.Box > 5)
+        {
+            cardsManager.RemoveCard(currentCard);
+        }
+        else
+        {
+            currentCard.CheckDay = DateTime.Today.AddDays(currentCard.Box);
+            cardsManager.SaveCard(currentCard);
+        }
+
         ChangeCard();
     }
 
     public void SetBadTouch()
     {
+        if (--currentCard.Box < 1)
+        {
+            currentCard.Box = 1;
+        }
+        
+        currentCard.CheckDay = DateTime.Today.AddDays(currentCard.Box);
+        cardsManager.SaveCard(currentCard);
+
         ChangeCard();
     }
 
