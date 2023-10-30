@@ -5,14 +5,14 @@ public class CardInfo
     public string Title { get; set; }
     public string Description { get; set; }
     public DateTime CheckDay { get; set; }
-    public DateTime LastCheckDay { get; set; }
+    public int Box { get; set; }
 
-    public CardInfo(string title, string description, DateTime nextDay, DateTime lastDay)
+    public CardInfo(string title, string description, DateTime nextDay, int box)
     {
         Title = title;
         Description = description;
         this.CheckDay = nextDay;
-        this.LastCheckDay = lastDay;
+        this.Box = box;
     }
 
     public CardInfo(string title, string description)
@@ -20,6 +20,6 @@ public class CardInfo
         Title = title;
         Description = description;
         this.CheckDay = DateTime.Today.AddDays(1);
-        this.LastCheckDay = DateTime.Today;
+        this.Box = 1;
     }
 }

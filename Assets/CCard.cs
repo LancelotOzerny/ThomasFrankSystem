@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class CCard : MonoBehaviour
@@ -42,11 +41,7 @@ public class CCard : MonoBehaviour
                         "yyyy.MM.dd",
                         System.Globalization.CultureInfo.InvariantCulture
                     ),
-                    DateTime.ParseExact(
-                        ((XmlElement)node).GetAttribute("lastCheckDate"),
-                        "yyyy.MM.dd",
-                        System.Globalization.CultureInfo.InvariantCulture
-                    )
+                    int.Parse(((XmlElement)node).GetAttribute("box"))
                 ));
                 break;
         }
@@ -107,7 +102,7 @@ public class CCard : MonoBehaviour
         card.SetAttribute("title", info.Title);
         card.SetAttribute("description", info.Description);
         card.SetAttribute("checkDate", info.CheckDay.ToString("yyyy.MM.dd"));
-        card.SetAttribute("lastCheckDate", info.LastCheckDay.ToString("yyyy.MM.dd"));
+        card.SetAttribute("box", info.Box.ToString());
         container.AppendChild(card);
 
         xmlDoc.Save(xmlPath);
