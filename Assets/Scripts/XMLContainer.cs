@@ -146,4 +146,12 @@ public class XMLContainer : MonoBehaviour
 
         xmlDocument.Save(xmlPath);
     }
+
+    /// <summary>
+    /// Получение нового созданного xml элемента
+    /// </summary>
+    public XmlElement GetNewXmlElement(string name)
+    {
+        return xmlDocument.CreateElement(name);
+    }
 }

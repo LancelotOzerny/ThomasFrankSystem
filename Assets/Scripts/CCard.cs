@@ -2,6 +2,9 @@ using System;
 using System.Globalization;
 using System.Xml;
 
+/// <summary>
+/// Карточка для тренировки
+/// </summary>
 public class CCard
 {
     private XmlElement xmlCard;
@@ -9,6 +12,20 @@ public class CCard
     private string description;
     private DateTime checkDate;
     private int box;
+
+    public string Title { get => title; }
+    public string Description { get => description; }
+    public DateTime CheckDate { get => checkDate; }
+    public int Box { get => box; }
+    
+    /// <summary>
+    /// Установка Xml элемента карточки
+    /// </summary>
+    /// <param name="element">Присваиваемый xml элемент</param>
+    public void SetXmlElement(XmlElement element)
+    {
+        xmlCard = element;
+    }
 
     public CCard(string title, string description) 
     {
