@@ -524,7 +524,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 505ee2ca5b907a442b338da34c2c71d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Text: {fileID: 0}
   title: {fileID: 0}
   description: {fileID: 0}
 --- !u!1 &250020853
@@ -861,9 +860,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 505ee2ca5b907a442b338da34c2c71d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Text: {fileID: 1688524879}
-  title: {fileID: 1688524879}
-  description: {fileID: 133879379}
+  title: {fileID: 65609554}
+  description: {fileID: 901630199}
 --- !u!1 &491167502
 GameObject:
   m_ObjectHideFlags: 0

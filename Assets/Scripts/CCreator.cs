@@ -1,12 +1,11 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
 public class CCreator : MonoBehaviour
 {
-    [SerializeField] private TMP_Text m_Text;
-
-    [SerializeField] private TextMeshProUGUI title = null;
-    [SerializeField] private TextMeshProUGUI description = null;
+    [SerializeField] private TMP_InputField title;
+    [SerializeField] private TMP_InputField description = null;
 
     public string Title { get => title.text; }
     public string Description { get => description.text;}
@@ -16,6 +15,7 @@ public class CCreator : MonoBehaviour
     /// </summary>
     public void Clear()
     {
-
+        title.text = string.Empty;
+        description.text = string.Empty;
     }
 }
