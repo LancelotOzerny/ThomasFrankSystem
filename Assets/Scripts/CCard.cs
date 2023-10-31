@@ -1,7 +1,10 @@
 using System;
+using System.Globalization;
+using System.Xml;
 
 public class CCard
 {
+    private XmlElement xmlCard;
     private string title;
     private string description;
     private DateTime checkDate;
@@ -21,5 +24,14 @@ public class CCard
         this.description = description;
         this.checkDate = checkDate;
         this.box = box;
+    }
+
+    public CCard(XmlElement element)
+    {
+        xmlCard = element;
+        this.title = element.GetAttribute("title");
+        this.description = element.GetAttribute("description");
+        this.checkDate = DateTime.ParseExact(element.GetAttribute("checkDate"), "yyyy.MM.dd", CultureInfo.CurrentCulture);
+        this.box = int.Parse(element.GetAttribute("box"));
     }
 }
