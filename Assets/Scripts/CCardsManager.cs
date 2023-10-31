@@ -9,6 +9,8 @@ public class CCardsManager : MonoBehaviour
     private XMLContainer xml;
     private CCreator trainer;
 
+    public List<CCard> Cards { get => cards; set => cards = value; }
+
     private void Start()
     {
         xml = GameObject.FindGameObjectWithTag("xml").GetComponent<XMLContainer>();

@@ -1,8 +1,6 @@
 using System;
-using System.ComponentModel;
 using System.Globalization;
 using System.Xml;
-using System.Xml.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -51,7 +49,7 @@ public class CCard
         xmlCard = element;
         this.title = element.GetAttribute("title");
         this.description = element.GetAttribute("description");
-        this.checkDate = DateTime.ParseExact(element.GetAttribute("checkDate"), "yyyy.MM.dd", CultureInfo.CurrentCulture);
+        this.checkDate = DateTime.ParseExact(element.GetAttribute("CheckDate"), "yyyy.MM.dd", CultureInfo.CurrentCulture);
         this.box = int.Parse(element.GetAttribute("box"));
     }
 
@@ -67,8 +65,8 @@ public class CCard
 
     private void SaveBox()
     {
-        this.checkDate.AddDays(box);
-        this.xmlCard.SetAttribute("checkData", checkDate.ToString("yyyy.MM.dd"));
+        this.checkDate = this.checkDate.AddDays(box);
+        this.xmlCard.SetAttribute("CheckDate", checkDate.ToString("yyyy.MM.dd"));
         this.xmlCard.SetAttribute("box", box.ToString());
         GameObject.FindGameObjectWithTag("xml").GetComponent<XMLContainer>().Save();
     }
