@@ -41,6 +41,12 @@ public class XMLContainer : MonoBehaviour
     /// </summary>
     private void Load()
     {
+        if (File.Exists(xmlPath) == false)
+        {
+            Debug.LogError("Xml Document is not founded");
+            return;
+        }
+
         this.xmlDocument = new XmlDocument();
         this.xmlDocument.Load(xmlPath);
     }
@@ -91,6 +97,12 @@ public class XMLContainer : MonoBehaviour
     /// <param name="element">Добавляемый Xml элемент</param>
     public void AddElementToContainer(XmlElement element)
     {
+        if (this.xmlDocument == null || this.container == null)
+        {
+            Debug.LogError("XmlDocument or container is null");
+            return;
+        }
+
         this.container.AppendChild(element);
         this.xmlDocument.Save(xmlPath);
 
@@ -106,6 +118,12 @@ public class XMLContainer : MonoBehaviour
     /// <param name="element">Удаляемый Xml элемент</param>
     public void RemoveElementFromContainer(XmlElement element)
     {
+        if (this.xmlDocument == null || this.container == null)
+        {
+            Debug.LogError("XmlDocument or container is null");
+            return;
+        }
+
         this.container.RemoveChild(element);
         this.xmlDocument.Save(xmlPath);
 
@@ -113,5 +131,19 @@ public class XMLContainer : MonoBehaviour
         {
             cards.Remove(element);
         }
+    }
+
+    /// <summary>
+    /// Сохранение xml документа
+    /// </summary>
+    public void Save()
+    {
+        if (this.xmlDocument == null)
+        {
+            Debug.LogError("XmlDocument is null");
+            return;
+        }
+
+        xmlDocument.Save(xmlPath);
     }
 }
